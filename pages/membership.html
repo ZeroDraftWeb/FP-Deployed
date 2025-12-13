@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Membership - BOLOBOX</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html">
+                <i class="fas fa-file-alt me-2"></i>BOLOBOX
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html#projects-section">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="membership.html">Membership</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="profile.html">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container-fluid">
+        <!-- Membership Page -->
+        <div id="membership-page" class="row mt-4">
+            <div class="col-12">
+                <h1 class="section-title">MEMBERSHIP</h1>
+                <p class="section-subtitle">You can do anything only with membership</p>
+
+                <div class="row mt-4">
+                    <div class="col-md-6 mb-4">
+                        <div class="membership-card">
+                            <div class="membership-title">COMMON</div>
+                            <div class="membership-price">FREE</div>
+                            <div class="membership-desc">
+                                Basic features for getting started with game design.
+                                Perfect for beginners and small projects.
+                            </div>
+                            <button class="btn btn-outline-light w-100">Current Plan</button>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-4">
+                        <div class="membership-card">
+                            <div class="membership-title">PREMIUM</div>
+                            <div class="membership-price">Rp 50.000</div>
+                            <div class="membership-desc">
+                                Unlock all features including advanced analytics,
+                                unlimited projects, and priority support.
+                            </div>
+                            <button class="btn btn-primary w-100">Upgrade Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>QRIS BCA Payment</h3>
+                            </div>
+                            <div class="card-body text-center">
+                                <p>To upgrade to Premium membership, scan the QR code below using your BCA mobile banking app:</p>
+                                <div class="qr-code">
+                                    <i class="fas fa-qrcode"></i>
+                                </div>
+                                <p>Amount: Rp 50.000</p>
+                                <p>Payment status will be automatically updated after successful payment.</p>
+                                <button class="btn btn-primary">Verify Payment</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Handle navbar Projects link
+        document.querySelectorAll('a[href="../index.html#projects-section"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                // Navigate to index.html and let the scroll happen after page load
+                window.location.href = '../index.html#projects-section';
+            });
+        });
+    </script>
+</body>
+</html>
