@@ -13,6 +13,18 @@ try {
     $pdo = new PDO($dsn, $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch(PDOException $e) {
+    error_log("Database connection failed: " . $e->getMessage());
+    // If it's an API request (checking accept header or just default behavior for this app)
+    if (isset($_SERVER['HTTP_ACCEPT']) && strpos($_SERVER['HTTP_ACCEPT'], 'application/json') !== false || 
+        strpos($_SERVER['SCRIPT_NAME'], 'api.php') !== false || 
+        strpos($_SERVER['SCRIPT_NAME'], 'auth.php') !== false) {
+        header('Content-Type: application/json');
+        die(json_encode([
+            'success' => false, 
+            'message' => 'Database connection failed: ' . $e->getMessage() . 
+                        ' (Host: ' . $host . ', Port: ' . $port . ', User: ' . $username . ')'
+        ]));
+    }
     die("Connection failed: " . $e->getMessage());
 }
 
