@@ -1,2 +1,10 @@
 .env
 vendor/
+.vscode/
+*.log
+.DS_Store
+Thumbs.db
+
+# Ignore user uploads but keep the directory
+assets/uploads/*
+!assets/uploads/.gitkeep
