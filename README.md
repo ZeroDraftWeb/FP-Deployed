@@ -1,87 +1,79 @@
-# GDD Organizer - Game Design Document Hub
+# BOLOBOX - Game Design Document Hub
 
-GDD Organizer adalah platform terpadu untuk pengembang game indie yang ingin mengelola seluruh aspek desain game mereka dalam satu tempat.
+BOLOBOX adalah platform berbasis web yang dirancang untuk membantu pengembang game mengelola aset, desain karakter, dan alur cerita (storline) dalam satu tempat yang terintegrasi. Proyek ini dibangun dengan fokus pada antarmuka modern dan arsitektur yang skalabel.
 
-## Fitur Utama
+---
 
-- **Asset Gallery** - Upload dan kelola aset game dalam tampilan galeri horizontal yang modern.
-- **Character Stat Builder** - Definisikan atribut karakter dengan slider visual intuitif dalam tampilan split-view.
-- **Interactive Storyline Editor** - Editor narasi yang kuat dengan fitur:
-    - **Visual Nodes**: Tambahkan dan edit node cerita.
-    - **Connections**: Sambungkan node untuk membuat alur cerita bercabang (Branching Narrative).
-    - **Zoom/Pan**: Navigasi kanvas cerita yang luas dengan fitur zoom in/out.
-    - **Save Story**: Simpan progres cerita Anda langsung dari toolbar.
-- **Edit Project Dashboard** - UI yang didesain ulang sepenuhnya dengan tema "Dark Dashboard" yang premium.
-- **Export as PDF** - (Coming Soon) Hasilkan dokumen Game Design Document yang dapat dicetak.
+## 🚀 Laporan Proyek & Implementasi Teknis
 
-## Teknologi yang Digunakan
+### 1. Frontend & Backend Development
 
-- **Frontend**: HTML5, Modern CSS (Custom Dark Theme), JavaScript (Vanilla ES6+).
-- **Backend**: PHP 8+ dengan PDO untuk keamanan database.
-- **Database**: MySQL.
-- **Library**: Bootstrap 5, Font Awesome Icons.
+**Frontend (Antarmuka Pengguna):**
+*   **Framework CSS:** Menggunakan **Bootstrap 5** untuk sistem grid responsif, komponen UI (Navbar, Cards, Modals), dan utilitas layout.
+*   **Custom Styling:** File `style.css` mengimplementasikan desain *Dark Mode* dengan nuansa industrial. Fitur visual meliputi efek *glassmorphism*, transisi halus, dan background grid interaktif untuk editor cerita.
+*   **Interaktivitas:** Menggunakan **Vanilla JavaScript** (ES6+) untuk:
+    *   Manipulasi DOM dinamis (Rendering daftar project tanpa reload).
+    *   Komunikasi asinkron via Fetch API.
+    *   Logika editor visual (Drag-and-drop node cerita).
 
-## Cara Menjalankan Aplikasi
+**Backend (Logika Server):**
+*   **Bahasa:** PHP Native (Tanpa Framework).
+*   **Arsitektur:** Menggunakan pola API-first. File PHP di folder `/php` berfungsi sebagai endpoint API yang menerima request JSON/formData dan mengembalikan respon JSON.
+*   **Keamanan:**
+    *   Sanitasi input untuk mencegah SQL Injection.
+    *   Hashing password menggunakan `password_hash()` (Bcrypt).
+    *   Validasi sesi server-side untuk melindungi akses data.
 
-### Persyaratan Sistem
+### 2. Database Implementation
 
-1. **XAMPP** (atau web server stack lain dengan PHP & MySQL).
-2. **Browser Modern** (Chrome, Firefox, Edge).
+Proyek ini menggunakan **MySQL** sebagai sistem manajemen basis data relasional. Struktur database dirancang untuk menjaga integritas data antar entitas game.
 
-### Instalasi
+**Skema Database:**
+*   **`users`**: Menyimpan kredensial pengguna (Username, Email, Hash Password).
+*   **`projects`**: Tabel utama yang menyimpan meta-data proyek game. Berelasi *One-to-Many* dengan users.
+*   **`assets`**: Menyimpan path file gambar yang diunggah. Berelasi dengan tabel `projects`.
+*   **`characters`**: Menyimpan atribut RPG (HP, Attack, Speed).
+*   **`story_nodes`**: Menyimpan data visual scripting untuk alur cerita. Menggunakan tipe data `JSON` untuk kolom `connections` guna menyimpan relasi graf yang kompleks antar node cerita.
 
-1. **Install XAMPP** jika belum.
-2. **Letakkan folder project** ke dalam direktori `htdocs`:
-   - Contoh Windows: `C:\xampp\htdocs\FP-PWEB-main\`
-3. **Mulai Apache dan MySQL** melalui XAMPP Control Panel.
-4. **Setup Database Otomatis**:
-   - Aplikasi ini dilengkapi dengan fitur setup otomatis. Cukup buka halaman utama aplikasi, dan jika database belum ada, aplikasi akan mencoba membuatnya (pastikan user root tanpa password, konfigurasi default XAMPP).
-   - **Manual Setup (Jika otomatis gagal):**
-     1. Buka `phpMyAdmin`.
-     2. Buat database `gdd_organizer`.
-     3. Import isi struktur tabel dari file `php/database.php` (atau biarkan script `php/setup.php` menjalankannya saat akses pertama).
-     4. Tabel yang dibutuhkan: `users`, `projects`, `assets`, `characters`, `story_nodes`.
+### 3. Integrasi API
 
-5. **Akses Aplikasi**:
-   - Buka browser dan kunjungi: `http://localhost/FP-PWEB-main/` (sesuaikan dengan nama folder Anda).
+BOLOBOX mengimplementasikan beberapa jenis integrasi API untuk meningkatkan fungsionalitas:
 
-### Struktur File Penting
+*   **Google OAuth 2.0:** Memungkinkan pengguna untuk Login/Nendaftar menggunakan akun Google mereka.
+    *   Endpoint: `https://accounts.google.com/o/oauth2/auth` & `https://oauth2.googleapis.com/token`.
+    *   Flow: Authorization Code Flow (Server-side exchange).
+*   **Internal RESTful API:** Backend PHP menyediakan endpoint REST untuk Frontend:
+    *   `POST /php/auth.php`: Otentikasi user.
+    *   `GET/POST /php/projects.php`: CRUD operasi untuk semua data proyek.
+    *   `POST /php/upload.php`: Penanganan upload file multipart.
 
-```
-FP/
-├── index.html              # Halaman Landing & Dashboard Utama
-├── pages/
-│   ├── login.html          # Authentication
-│   ├── edit-project.html   # INTI APLIKASI: Editor Proyek Lengkap (UI Baru)
-│   └── profile.html        # Manajemen Profil User
-├── css/
-│   └── style.css           # Styling utama (Dark Theme, Custom Sliders, Nodes)
-├── php/
-│   ├── database.php        # Koneksi DB & Skema Tabel
-│   ├── auth.php            # Login/Register/Session
-│   └── projects.php        # API Proyek (CRUD, Uploads, Save Story)
-└── assets/uploads/         # Direktori penyimpanan file user
-```
+### 4. Pengujian (Testing)
 
-## Panduan Penggunaan
+Pengujian dilakukan untuk memastikan stabilitas aplikasi sebelum deployment:
 
-1. **Buat Akun**: Register akun baru lalu Login.
-2. **Dashboard**: Buat proyek baru dengan mengklik "Create New Project".
-3. **Edit Project**: Masuk ke halaman editor proyek yang baru didesain ulang.
-   - **Upload Asset**: Gunakan tombol di bagian "Asset Gallery".
-   - **Edit Karakter**: Masukkan nama dan geser slider stat di "Character Stat Builder", lalu Simpan.
-   - **Buat Cerita**:
-     - Klik **(+)** untuk tambah node.
-     - Klik **(Link)** untuk masuk mode koneksi -> Klik Node Awal -> Klik Node Tujuan.
-     - Double-klik node untuk mengedit teks.
-     - Klik **(Save)** di toolbar floppy disk untuk menyimpan cerita.
+*   **Unit Testing (Manual):**
+    *   Verifikasi fungsi registrasi/login (Cek validasi email & password).
+    *   Tes upload gambar (Validasi tipe file & batas ukuran 5MB).
+*   **Integration Testing:**
+    *   Memastikan alur Google Login berhasil membuat sesi user di database lokal.
+    *   Memastikan data karakter yang diedit tersimpan dan dimuat kembali dengan benar saat halaman di-refresh.
+*   **Deployment Testing (Railway):**
+    *   Memastikan Environment Variables (`DB_HOST`, `GOOGLE_CLIENT_ID`) terbaca dengan benar.
+    *   Verifikasi koneksi database di lingkungan produksi cloud.
+    *   Pengecekan error handling (Menampilkan pesan JSON yang jelas saat koneksi DB gagal).
 
-## Catatan Penting
+---
 
-- **Akses**: Pastikan mengakses via `http://localhost/...` dan BUKAN `file://...` agar fitur backend berjalan.
-- **Email Save Error (Fixed)**: Logika penyimpanan cerita sekarang mendukung validasi yang benar tanpa error "email required".
-- **Start Node (Fixed)**: Node awal default sekarang terhubung dengan benar ke sistem data.
+## 🛠️ Instalasi Lokal
 
-## Lisensi
-
-Proyek ini dibuat untuk tujuan pendidikan (Final Project PWEB).
+1.  **Clone Repository**
+    ```bash
+    git clone https://github.com/username/FP-Test.git
+    ```
+2.  **Setup Database**
+    *   Import file database query (jika ada) atau biarkan `database.php` membuat tabel secara otomatis saat pertama kali dijalankan.
+    *   Pastikan XAMPP/MySQL berjalan.
+3.  **Konfigurasi Environment**
+    *   Salin `.env.example` ke `.env` (jika menggunakan dotenv lokal) atau atur variabel di `php/database.php` jika diperlukan.
+4.  **Jalankan**
+    *   Buka `localhost/FP-Test` di browser.
