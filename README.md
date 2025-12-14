@@ -1,6 +1,6 @@
 # BOLOBOX - Game Design Document Hub
 
-BOLOBOX adalah platform berbasis web yang dirancang untuk membantu pengembang game mengelola aset, desain karakter, dan alur cerita (storline) dalam satu tempat yang terintegrasi. Proyek ini dibangun dengan fokus pada antarmuka modern dan arsitektur yang skalabel.
+BOLOBOX adalah platform berbasis web yang dirancang untuk membantu pengembang game mengelola aset, desain karakter, dan alur cerita (storyline) dalam satu tempat yang terintegrasi. Proyek ini dibangun dengan fokus pada antarmuka modern dan arsitektur yang skalabel.
 
 ---
 
