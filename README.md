@@ -68,7 +68,7 @@ Pengujian dilakukan untuk memastikan stabilitas aplikasi sebelum deployment:
 
 1.  **Clone Repository**
     ```bash
-    git clone https://github.com/username/FP-Test.git
+    git clone https://github.com/username/FP-Deployed.git
     ```
 2.  **Setup Database**
     *   Import file database query (jika ada) atau biarkan `database.php` membuat tabel secara otomatis saat pertama kali dijalankan.
@@ -76,4 +76,4 @@ Pengujian dilakukan untuk memastikan stabilitas aplikasi sebelum deployment:
 3.  **Konfigurasi Environment**
     *   Salin `.env.example` ke `.env` (jika menggunakan dotenv lokal) atau atur variabel di `php/database.php` jika diperlukan.
 4.  **Jalankan**
-    *   Buka `localhost/FP-Test` di browser.
+    *   Buka `localhost/FP-Deployed` di browser.
