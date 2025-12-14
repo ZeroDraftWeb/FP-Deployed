@@ -4,7 +4,7 @@ BOLOBOX adalah platform berbasis web yang dirancang untuk membantu pengembang ga
 
 ---
 
-## 🚀 Laporan Proyek & Implementasi Teknis
+##  Laporan Proyek & Implementasi Teknis
 
 ### 1. Frontend & Backend Development
 
@@ -64,7 +64,7 @@ Pengujian dilakukan untuk memastikan stabilitas aplikasi sebelum deployment:
 
 ---
 
-## 🛠️ Instalasi Lokal
+##  Instalasi Lokal
 
 1.  **Clone Repository**
     ```bash
